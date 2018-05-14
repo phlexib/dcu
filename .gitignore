@@ -4,7 +4,6 @@ jsconfig.json
 *.aep
 
 build
-dist
 release
 Meta
 node_modules
