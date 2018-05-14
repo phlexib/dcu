@@ -1,0 +1,41 @@
+{
+    "name"        : "Alternate Dynamic Elements",
+    "orientation" : "column",
+    "buttons"     : [
+        {
+            "label"      : "Script element",
+            "markerText" : "script"
+        },
+        {
+            "label"      : "Location element",
+            "markerText" : "location"
+        },
+        {
+            "label"      : "Location element (right)",
+            "markerText" : "locationRight"
+        },
+        {
+            "label"      : "Comment element",
+            "markerText" : "comment"
+        },
+        {
+            "label"      : "Comment element (right)",
+            "markerText" : "commentRight"
+        },
+        {
+            "label"      : "Reaction element",
+            "markerText" : "reaction"
+        },
+        {
+            "label"      : "Reaction element (right)",
+            "markerText" : "reactionRight"
+        },
+        {
+            "label"      : "Date"
+        },
+        {
+            "label"      : "Generic right-to-left",
+            "markerText" : "right"
+        }
+    ]
+}

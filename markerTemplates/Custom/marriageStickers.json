@@ -1,0 +1,9 @@
+{
+    "name"            : "Mod - Marriage Sticker Groups",
+    "orientation"     : "row",
+    "numberedButtons" : {
+      "count"  : 4,
+      "offset" : 1,
+      "prefix" : "marStickerGroup"
+    }
+}
