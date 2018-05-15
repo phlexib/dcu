@@ -1,8 +1,8 @@
 {
-  "name": "dcToJsonUser",
+  "name": "DCtoJSONUser",
   "version": "1.0.0",
   "description": "DC To Json for User",
-  "main": "dcToJsonUser.jsx",
+  "main": "main.jsx",
   "devDependencies": {
     "del": "^2.2.0",
     "eslint-config-aftereffects": "^1.1.0",
