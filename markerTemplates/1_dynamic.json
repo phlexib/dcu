@@ -1,0 +1,8 @@
+{
+    "orientation" : "row",
+    "buttons"     : [
+        {
+            "label"      : "dynamic",
+        }
+    ]
+}

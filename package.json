@@ -1,0 +1,34 @@
+{
+  "name": "DCtoJSONUser",
+  "version": "1.0.0",
+  "description": "DC To Json for User",
+  "main": "DCtoJSON-UI.jsx",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "eslint-config-aftereffects": "^1.1.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^4.0.0",
+    "gulp-indent": "^1.0.1",
+    "gulp-replace": "^0.6.1",
+    "gulp-token-replace": "^1.1.2",
+    "run-sequence": "^1.1.5",
+    "yargs": "^10.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zlovatt/markerMaker.git"
+  },
+  "author": "zlovatt",
+  "license": "ISC",
+  "homepage": "https://github.com/zlovatt/markerMaker",
+  "custom": {
+    "friendlyName": "Marker Maker",
+    "productUrl": "https://buck.tv/",
+    "createdBy": "Created by Moses Journey & Zack Lovatt",
+    "createdContact": "journey@buck.tv; zack@zacklovatt.com"
+  }
+}

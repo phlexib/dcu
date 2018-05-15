@@ -1,0 +1,98 @@
+{
+    "extends" : "aftereffects",
+    "env"           : {
+        "node"    : true
+    },
+    "globals"       : {
+        // AE
+        "writeLn" : false,
+
+        // Libs
+        "aeq" : true,
+
+        // Framwork
+        "Util"    : true,
+        "Log"     : true,
+        "Config"  : true,
+        "Core"    : true,
+        "ErrorUI" : true,
+        "MainUI"  : true,
+        "Markers" : true,
+        "Prefs"   : true,
+        "Style"   : true
+    },
+    "parserOptions" : {
+        "sourceType" : "module"
+    },
+    "rules"         : {
+        // Style settings
+        "array-bracket-spacing"       : ["warn", "never", { "singleValue" : false, "objectsInArrays" : false, "arraysInArrays" : false}],
+        "block-spacing"               : "warn",
+        "brace-style"                 : ["warn", "1tbs", { "allowSingleLine": true }],
+        "camelcase"                   : "warn",
+        "comma-dangle"                : "warn",
+        "comma-spacing"               : "warn",
+        "comma-style"                 : "warn",
+        "curly"                       : [ "warn", "multi-or-nest" ],
+        "eol-last"                    : "warn",
+        "eqeqeq"                      : "warn",
+        "func-call-spacing"           : "warn",
+        "indent"                      : ["warn", 4, { "SwitchCase" : 1 }],
+        "key-spacing"                 : ["warn", { "beforeColon": true, "align" : { "beforeColon" : true, "on" : "colon" } }],
+        "keyword-spacing"             : "warn",
+        "linebreak-style"             : "warn",
+        "lines-around-comment"        : ["warn", { "allowBlockStart": true, "allowObjectStart" : true }],
+        "no-else-return"              : "warn",
+        "no-floating-decimal"         : "warn",
+        "no-mixed-spaces-and-tabs"    : "warn",
+        "no-multi-spaces"             : "warn",
+        "no-multi-str"                : "warn",
+        "no-redeclare"                : "warn",
+        "no-tabs"                     : "warn",
+        "no-trailing-spaces"          : "warn",
+        "no-undef"                    : "warn",
+        "no-unneeded-ternary"         : "warn",
+        "no-unreachable"              : "warn",
+        "no-unused-vars"              : ["warn", { "args" : "all" }],
+        "no-useless-concat"           : "warn",
+        "object-property-newline"     : "warn",
+        "one-var"                     : ["warn", "never"],
+        "quote-props"                 : "warn",
+        // "no-use-before-define"        : "warn",
+        "quotes"                      : "warn",
+        "semi-spacing"                : "warn",
+        "semi-style"                  : "warn",
+        "semi"                        : "warn",
+        "space-before-blocks"         : "warn",
+        "space-before-function-paren" : "warn",
+        "space-in-parens"             : "warn",
+        "space-infix-ops"             : "warn",
+        "switch-colon-spacing"        : "warn",
+        "require-jsdoc"               : "warn",
+        "valid-jsdoc"                 : ["warn", { "requireReturn" : false, "requireReturnType" : true}],
+
+        // Possible errors
+        "for-direction"               : "error",
+        "guard-for-in"                : "error",
+        "no-dupe-args"                : "error",
+        "no-dupe-keys"                : "error",
+        "no-duplicate-case"           : "error",
+        "no-empty"                    : ["error", { "allowEmptyCatch": true } ],
+        "no-extend-native"            : "error",
+        "no-extra-parens"             : ["error", "all", { "nestedBinaryExpressions" : false }],
+        "no-extra-semi"               : "error",
+        // "no-global-assign"            : "error",
+        "no-label-var"                : "error",
+        "no-multi-assign"             : "error",
+        "no-nested-ternary"           : "error",
+        "no-obj-calls"                : "error",
+        "no-return-assign"            : "error",
+        "no-sparse-arrays"            : "error",
+        "no-undef-init"               : "error",
+        "no-unsafe-finally"           : "error",
+        "no-unsafe-negation"          : "error",
+        "no-unused-labels"            : "error",
+        "use-isnan"                   : "error",
+        "yoda"                        : "error"
+    }
+}

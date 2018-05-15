@@ -1,0 +1,34 @@
+{
+    "name"        : "Recaps - Balloon Reactions",
+    "orientation" : "row",
+    "buttons"     : [
+        {
+            "label"      : "Like",
+            "markerText" : "balloonLike"
+        },
+        {
+            "label"      : "Love",
+            "markerText" : "balloonLove"
+        },
+        {
+            "label"      : "Wow",
+            "markerText" : "balloonWow"
+        },
+        {
+            "label"      : "Haha",
+            "markerText" : "balloonHaha"
+        },
+        {
+            "label"      : "Red",
+            "markerText" : "balloonRed"
+        },
+        {
+            "label"      : "Blue",
+            "markerText" : "balloonBlue"
+        },
+        {
+            "label"      : "Yellow",
+            "markerText" : "balloonYellow"
+        }
+    ]
+}

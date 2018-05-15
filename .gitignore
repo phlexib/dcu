@@ -1,0 +1,9 @@
+**/.DS_Store
+jsconfig.json
+
+*.aep
+
+build
+release
+Meta
+node_modules
