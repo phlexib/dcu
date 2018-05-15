@@ -1,6 +1,6 @@
 {
   "name": "dcToJsonUser",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "DC To Json for User",
   "main": "dcToJsonUser.jsx",
   "devDependencies": {

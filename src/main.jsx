@@ -1,6 +1,23 @@
 ﻿//////
 (function(thisObj) {
+  //// Reference DynamicContentToJSON from file
+  var scriptRootFolder = Folder(
+    "//GlobalPrefs/CURRENT/src/AE/scripts/Pipeline/dynamicContentToJSON"
+  );
+  var dcToJSONScriptFile = File(
+    scriptRootFolder.fsName + "/" + "dynamicContentToJSON.jsx"
+  );
+  if (dcToJSONScriptFile) {
+    dcToJSONScriptFile.open("r");
+    var dcToJSONScript = dcToJSONScriptFile.read();
+    dcToJSONScriptFile.close();
+    eval(dcToJSONScript);
+  } else {
+    alert("could not find Script");
+  }
+
   /// Globals Variables
+
   var EXPORT_DETAILS_VISIBLE = false;
   var MARKER_GROUPS_ARRAY = [{ id: 1, text: "group name" }];
   var SCRIPTNAME = "DC To Json User";
@@ -173,7 +190,7 @@
   });
   exportBtn = exportGrp.add("button", [10, 10, 260, 40], "EXPORT ALL");
   exportBtn.onClick = function() {
-    dynamicContentToJSON.dcMain.onExportAllClick();
+    DynamicContentToJSON.dcMain.onExportAllClick();
   };
 
   exportDetailBtn = exportGrp.add("button", [350, 10, 380, 40], "<");
@@ -224,7 +241,6 @@
 
   ///ADD NEW MARKER GROUP
   function addMarkerGrp(parent, values) {
-   
     var newId = values.id;
     var newText = values.text;
     if (!newId) {
@@ -353,22 +369,22 @@
         "Export Content"
       ); //Add a button to that group
       exportContentBtn.onClick = function() {
-        dynamicContentToJSON.dcMain.onExportAllClick();
+        DynamicContentToJSON.dcMain.onExportAllClick();
       };
       var testExportBtn = g.add("button", [10, 10, 260, 40], "Test Export"); //Add another button to that group
       testExportBtn.onClick = function() {
-        dynamicContentToJSON.dcMain.onTestExportClick();
+        DynamicContentToJSON.dcMain.onTestExportClick();
       };
 
       // Tempoarily remove Validator as it doesn't work
       // var validatorBtn = g.add("button", [10, 10,260, 40], "Validator");
       // validatorBtn.onClick = function(){
-      //   dynamicContentToJSON.dcMain.onValidateClick();
+      //   DynamicContentToJSON.dcMain.onValidateClick();
       // };
       ///
       var uniquifyBtn = g.add("button", [10, 10, 260, 40], "Uniquify");
       uniquifyBtn.onClick = function() {
-        dynamicContentToJSON.dcMain.onUniquifyClick();
+        DynamicContentToJSON.dcMain.onUniquifyClick();
       };
       EXPORT_DETAILS_VISIBLE = true;
       updateUILayout(expDetailGrp); //Update UI
@@ -490,10 +506,10 @@
     }
   }
 
-  function sortArray(a,b){
-    return ( (a.id > b.id) - (a.id < b.id))
+  function sortArray(a, b) {
+    return (a.id > b.id) - (a.id < b.id);
   }
- 
+
   function getUserDataFolder() {
     var userDataFolder = Folder.userData;
     var aescriptsFolder = Folder(
