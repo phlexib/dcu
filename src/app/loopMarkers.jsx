@@ -13,7 +13,6 @@ function resetMarkers (){
 };
 
 function getMarkers(curComp) {
-  
   if (proj !== null) {
     if (curComp !== null && curComp instanceof CompItem) {
       for (var l =1 ; l<= curComp.numLayers ;l++) {
@@ -30,20 +29,21 @@ function getMarkers(curComp) {
 
 //// find markers on layer
 function checkLayerMarkers(layer,curComp) {
+   
   markerProps = layer.property("Marker");
   var digit = /^\d/g;
   for (var i = 1; i <= markerProps.numKeys; i++) {
     marker = new Object();
     var comment = markerProps.keyValue(i).comment;
-    marker.id = comment;
-    marker.text = markerProps.keyValue(i).chapter;
+    marker.id = groupMarkers.length +4;
+    marker.text = comment;
     marker.time = markerProps.keyTime(i);
     marker.layerIndex = layer.index;
     marker.comp = curComp.id;
     layerMarkers.push(marker);
-    if(marker.id.match(digit)){
-      groupMarkers.push(marker);
-    }
+    var defaults = /dynamic|textVAlign|script|location|reaction|comment/  
+    if(!(marker.text.match(defaults))){ groupMarkers.push(marker)}
+
   }
 }
 
