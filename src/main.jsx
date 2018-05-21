@@ -472,7 +472,12 @@
       return;
     }
 
-    aeq.getSelectedLayers(comp).forEach(function(layer) {
+    var selectedLayers =  aeq.getSelectedLayers(comp);
+    if(selectedLayers.length <1){
+      alert("Select a layer before assigning a marker.");
+    }
+    else{
+      selectedLayers.forEach(function(layer) {
       var marker = new MarkerValue(markerComment);
       var markerTime = comp.time;
       var hasCloseKeyframe = false;
@@ -529,7 +534,7 @@
         aeq.getMarkerGroup(layer).setValueAtTime(markerTime, marker);
       }
     });
-
+  }
     app.endUndoGroup();
     //Log.trace("<-- setMarker: " + String(markerComment));
   }
