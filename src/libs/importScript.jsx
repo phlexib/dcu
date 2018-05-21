@@ -2,7 +2,6 @@
     var scriptRootFolder;
     var pcRoot = "//abadal/GlobalPrefs/work.ben/AE/Scripts";
     var macRoot = "//GlobalPrefs/work.ben/AE/Scripts";
-    // var macRoot = "/Applications/Adobe After Effects CC 2017/Scripts/(instructional)/"
       function setScriptFile(scriptPath){
         if (isWindows === true) {
             scriptRootFolder = Folder(pcRoot);
@@ -40,5 +39,3 @@
 
 })();
 
-
-    // "dynamicContentToJSON/dynamicContentToJSON.jsx"

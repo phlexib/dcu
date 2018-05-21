@@ -1,7 +1,0 @@
-{
-    "name"            : "Group Number",
-    "orientation"     : "row",
-    "numberedButtons" : {
-      "count" : 10
-    }
-}

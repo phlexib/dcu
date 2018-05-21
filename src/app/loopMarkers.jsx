@@ -1,8 +1,8 @@
 var LoopMarkers = (function () {
   var proj = app.project;
   var markerProps ,  marker;
-  var layerMarkers = new Array();
-  var groupMarkers = new Array();
+  var layerMarkers = [];
+  var groupMarkers = [];
  
 
 ////// GET ALL MARKERS
@@ -13,6 +13,7 @@ function resetMarkers (){
 };
 
 function getMarkers(curComp) {
+  var grpMarkers = []
   if (proj !== null) {
     if (curComp !== null && curComp instanceof CompItem) {
       for (var l =1 ; l<= curComp.numLayers ;l++) {
@@ -24,10 +25,8 @@ function getMarkers(curComp) {
       }
     }
   }
-  return groupMarkers;
-};
 
-//// find markers on layer
+  //// find markers on layer
 function checkLayerMarkers(layer,curComp) {
    
   markerProps = layer.property("Marker");
@@ -41,11 +40,17 @@ function checkLayerMarkers(layer,curComp) {
     marker.layerIndex = layer.index;
     marker.comp = curComp.id;
     layerMarkers.push(marker);
-    var defaults = /dynamic|textVAlign|script|location|reaction|comment/  
-    if(!(marker.text.match(defaults))){ groupMarkers.push(marker)}
+    var defaults = /dynamic|textVAlign|script|location|reaction|comment|date/  
+    if(!(marker.text.match(defaults))){ 
+      groupMarkers.push(marker)
+      grpMarkers.push(marker)}
 
   }
 }
+  return grpMarkers;
+};
+
+
 
 //////////////////////////////// UTILS
 ////// Find element in array

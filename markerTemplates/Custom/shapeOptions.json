@@ -1,9 +1,0 @@
-{
-    "name"            : "Mod - Shape Options",
-    "orientation"     : "row",
-    "numberedButtons" : {
-      "count"  : 6,
-      "offset" : 1,
-      "prefix" : "shapeOptionGroup"
-    }
-}

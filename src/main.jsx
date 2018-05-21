@@ -1,28 +1,5 @@
 ﻿//////
 (function(thisObj) {
-  //// Reference DynamicContentToJSON from file
-  // var scriptRootFolder;
-
-  // if (isWindows === true) {
-  //   scriptRootFolder = Folder("//abadal//GlobalPrefs/work.ben/AE/Scripts");
-  // } else {
-  //   scriptRootFolder = Folder("//GlobalPrefs/work.ben/AE/Scripts");
-  // }
-  // var dcToJSONScriptFile = File(
-  //   scriptRootFolder.fsName +
-  //     "/" +
-  //     "dynamicContentToJSON/dynamicContentToJSON.jsx"
-  // );
-
-  // if (dcToJSONScriptFile.exists) {
-  //   dcToJSONScriptFile.open("r");
-  //   var dcToJSONScript = dcToJSONScriptFile.read();
-  //   dcToJSONScriptFile.close();
-  //   eval(dcToJSONScript);
-  // } else {
-  //   alert("could not find DCtoJSON Script");
-  // }
-
   ImportScript.runScript("dynamicContentToJSON/dynamicContentToJSON.jsx");
 
   /// Globals Variables
@@ -30,13 +7,16 @@
   var EXPORT_DETAILS_VISIBLE = false;
   var MARKER_GROUPS_ARRAY = [];
   var SCRIPTNAME = "DC To Json User";
-  var SCRIPTVERSION = "0.0.1";
+  var SCRIPTVERSION = "1.0.0";
   var MARKERS_DEFAULTS = [
-    { id: "Script", text: "script" },
-    { id: "Location", text: "script" },
-    { id: "Comment", text: "script" },
-    { id: "Reaction", text: "script" }
+    { id: "Script", text: "Script" },
+    { id: "Location", text: "Location" },
+    { id: "Comment", text: "Comment" },
+    { id: "Reaction", text: "Reaction" },
+    { id: "Date", text: "Date" }
   ];
+
+
 
   ///// START UI
   var win = buildUI(thisObj);
@@ -57,7 +37,7 @@
   title = titleGrp.add("statictext", [0, 10, 50, 20], "v" + SCRIPTVERSION);
 
   //// ORGANIZE PANEL
-  orgPanel = win.add("panel", [10, 10, 300, 80], "1 - ORGANIZE PROJECT");
+  orgPanel = win.add("panel", [10, 10, 300, 80], "1 - SIMPLIFY PROJECT");
   orgPanel.orientation = "row";
 
   orgBtn = orgPanel.add("button", [10, 10, 150, 40], "MOVE ASSETS");
@@ -116,12 +96,18 @@
   );
   assignMkrBtn.helpTip = "Load Markers group from active comp";
   assignMkrBtn.onClick = function() {
-    for (var mark = 0; mark < MARKER_GROUPS_ARRAY.length; mark++) {
+    var currentMarkers = LoopMarkers.getMarkers(app.project.activeItem);
+    for (var mark = MARKERS_DEFAULTS.length; mark < grpMarkersGrp.children.length; mark++) {
+      var oldText = currentMarkers[mark-MARKERS_DEFAULTS.length].text;
+      var kids = grpMarkersGrp.children;
+      var btnGrp = kids[mark].children;			
       updateGroupMarkerText(
-        MARKER_GROUPS_ARRAY[mark].id,
-        MARKER_GROUPS_ARRAY[mark].text
+        oldText,
+        btnGrp[0].text,
+        btnGrp[1].text
       );
     }
+    refreshMarkers();
   };
 
   var reloadBinaryString =
@@ -260,7 +246,7 @@
       setMarker(this.parent.children[1].text.toLowerCase() + radioValue);
     };
     mkrBtn.helpTip = "Apply Group to Selected Layers";
-    mkrLabel = mkrGrp.add("edittext", [30, 10, 180, 30], newId, {
+    mkrLabel = mkrGrp.add("statictext", [30, 10, 180, 30], newId, {
       readonly: 1,
       noecho: 0,
       borderless: 0,
@@ -310,14 +296,14 @@
     });
     //mkrLabel.onChanging = function(){$.writeln (newId + " selected.")};
 
-    mkrLabel.addEventListener("keydown", function(kd) {
-      if (kd.keyName == "Enter") {
-        var curGrpObject = getByValue(MARKER_GROUPS_ARRAY, newText);
-        var arrIndex = getIndexByValue(MARKER_GROUPS_ARRAY, newText);
-        MARKER_GROUPS_ARRAY[arrIndex].text = kd.target.text;
-        // updateGroupMarkerText(newId,kd.target.text);
-      }
-    });
+    // mkrLabel.addEventListener("keydown", function(kd) {
+    //   if (kd.keyName == "Enter") {
+    //     var curGrpObject = getByValue(MARKER_GROUPS_ARRAY, newText);
+    //     var arrIndex = getIndexByValue(MARKER_GROUPS_ARRAY, newText);
+    //     MARKER_GROUPS_ARRAY[arrIndex].text = kd.target.text;
+       
+    //   }
+    // });
 
     mkrAddBtn = mkrGrp.add("button", [100, 10, 120, 30], "+");
     mkrAddBtn.onClick = function() {
@@ -328,9 +314,6 @@
     parent.orientation = "column";
     mkrGrp.alignChildren = "left";
     updateUILayout(parent); //Update UI
-    $.writeln(index)
-    $.writeln("newText" + index)
-    $.writeln(MARKER_GROUPS_ARRAY.toSource())
   }
 
   //// ADD MARKER GROUP TO LAYER
@@ -358,23 +341,22 @@
     refreshMarkers();
   }
 
-  function updateGroupMarkerText(id, text) {
-    for (var m = 0; m < LoopMarkers.groupMarkers.length; m++) {
-      if (LoopMarkers.groupMarkers[m].text == text) {
-        var layerComp = findItemById(LoopMarkers.groupMarkers[m].comp);
-        var layerToSet = layerComp.layer(
-          LoopMarkers.groupMarkers[m].layerIndex
-        );
-        var updatedMarker = new MarkerValue(
-          LoopMarkers.groupMarkers[m].id,
-          text
-        );
-        layerToSet
-          .property("Marker")
-          .setValueAtTime(LoopMarkers.groupMarkers[m].time, updatedMarker);
+  function updateGroupMarkerText(curText,id, text) {
+    var currentMarkers = LoopMarkers.getMarkers(app.project.activeItem);
+
+        for (var m = 0; m < currentMarkers.length; m++) {
+          if (currentMarkers[m].text == curText) {
+            var layerComp = findItemById(currentMarkers[m].comp);
+            var layerToSet = layerComp.layer(currentMarkers[m].layerIndex);
+            var updatedMarker = new MarkerValue(
+              text
+            );
+            layerToSet
+              .property("Marker")
+              .setValueAtTime(currentMarkers[m].time, updatedMarker);
+          }
+        }
       }
-    }
-  }
 
   //// REMOVE MARKERS
 
@@ -537,6 +519,7 @@
         aeq.getMarkerGroup(layer).setValueAtTime(markerTime, marker);
       }
     });
+    refreshMarkers();
   }
     app.endUndoGroup();
     //Log.trace("<-- setMarker: " + String(markerComment));
