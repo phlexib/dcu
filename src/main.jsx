@@ -507,6 +507,7 @@
           if (res !== true) {
             return;
           } else {
+            markerExists = true;
             hasAlignment = true;
             var updateMarker = new MarkerValue(markerComment);
             aeq
