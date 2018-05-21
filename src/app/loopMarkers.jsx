@@ -40,7 +40,7 @@ function checkLayerMarkers(layer,curComp) {
     marker.layerIndex = layer.index;
     marker.comp = curComp.id;
     layerMarkers.push(marker);
-    var defaults = /dynamic|textVAlign|script|location|reaction|comment|date/  
+    var defaults = /dynamic|textVAlign|script|location|reaction|comment|date|#/  
     if(!(marker.text.match(defaults))){ 
       groupMarkers.push(marker)
       grpMarkers.push(marker)}
