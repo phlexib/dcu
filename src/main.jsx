@@ -1,27 +1,29 @@
 ﻿//////
 (function(thisObj) {
   //// Reference DynamicContentToJSON from file
-  var scriptRootFolder;
+  // var scriptRootFolder;
 
-  if (isWindows === true) {
-    scriptRootFolder = Folder("//abadal//GlobalPrefs/work.ben/AE/Scripts");
-  } else {
-    scriptRootFolder = Folder("//GlobalPrefs/work.ben/AE/Scripts");
-  }
-  var dcToJSONScriptFile = File(
-    scriptRootFolder.fsName +
-      "/" +
-      "dynamicContentToJSON/dynamicContentToJSON.jsx"
-  );
+  // if (isWindows === true) {
+  //   scriptRootFolder = Folder("//abadal//GlobalPrefs/work.ben/AE/Scripts");
+  // } else {
+  //   scriptRootFolder = Folder("//GlobalPrefs/work.ben/AE/Scripts");
+  // }
+  // var dcToJSONScriptFile = File(
+  //   scriptRootFolder.fsName +
+  //     "/" +
+  //     "dynamicContentToJSON/dynamicContentToJSON.jsx"
+  // );
 
-  if (dcToJSONScriptFile.exists) {
-    dcToJSONScriptFile.open("r");
-    var dcToJSONScript = dcToJSONScriptFile.read();
-    dcToJSONScriptFile.close();
-    eval(dcToJSONScript);
-  } else {
-    alert("could not find DCtoJSON Script");
-  }
+  // if (dcToJSONScriptFile.exists) {
+  //   dcToJSONScriptFile.open("r");
+  //   var dcToJSONScript = dcToJSONScriptFile.read();
+  //   dcToJSONScriptFile.close();
+  //   eval(dcToJSONScript);
+  // } else {
+  //   alert("could not find DCtoJSON Script");
+  // }
+
+  ImportScript.runScript("dynamicContentToJSON/dynamicContentToJSON.jsx");
 
   /// Globals Variables
 
