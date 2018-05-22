@@ -414,7 +414,7 @@
           case "-":
             if (curSubGroup > 1) {
               newSubGroupNumber = (curSubGroup-1).toString()
-              currentText.replace(lookupPattern,newSubGroupNumber);
+              labelText = currentText.replace(lookupPattern,newSubGroupNumber);
             } else {
               labelText = currentText;
             }
