@@ -1,9 +1,8 @@
-﻿//////
+﻿
 (function(thisObj) {
   ImportScript.runScript("dynamicContentToJSON/dynamicContentToJSON.jsx");
 
-  /// Globals Variables
-
+  ///// Globals Variables
   var EXPORT_DETAILS_VISIBLE = false;
   var MARKER_GROUPS_ARRAY = [];
   var SCRIPTNAME = "DC To Json User";
@@ -28,13 +27,13 @@
     return pal;
   }
 
-  //// TITLE GRP
+  ///// TITLE GRP
   titleGrp = win.add("group", [0, 0, 300, 20]);
   titleGrp.orientation = "row";
   titleGrp.alignment = "left";
   title = titleGrp.add("statictext", [0, 10, 50, 20], "v" + SCRIPTVERSION);
 
-  //// ORGANIZE PANEL
+  ///// ORGANIZE PANEL
   orgPanel = win.add("panel", [10, 10, 300, 80], "1 - SIMPLIFY PROJECT");
   orgPanel.orientation = "row";
 
@@ -54,7 +53,7 @@
     RenameLayers.renameLayerToShot(app.project.activeItem);
   };
 
-  //// MAKE MARKERS PANEL
+  ///// MAKE MARKERS PANEL
   mrkPanel = win.add("panel", [10, 85, 300, 370], "2 - MARKER MAKER");
   mrkPanel.orientation = "column";
 
@@ -139,15 +138,11 @@
   hahaBtn.onClick = function() {
     setMarker("reactionHaha");
   }
-
-  // relaod markers buttons
-
+  
   reloadGrp = mrkPanel.add("group", [10, 120, 385, 180], "Group Markers", {
     orientation: "row"
   });
   reloadGrp.alignment = "fill";
-
-
 
   var assignString =
     '\u0089PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x14\x00\x00\x00\x14\b\x06\x00\x00\x00\u008D\u0089\x1D\r\x00\x00\x00\tpHYs\x00\x00\x0B\x13\x00\x00\x0B\x13\x01\x00\u009A\u009C\x18\x00\x00\x06\x00iTXtXML:com.adobe.xmp\x00\x00\x00\x00\x00<?xpacket begin="\u00EF\u00BB\u00BF" id="W5M0MpCehiHzreSzNTczkc9d"?> <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c140 79.160451, 2017/05/06-01:08:21        "> <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#" xmp:CreatorTool="Adobe Photoshop CC 2018 (Macintosh)" xmp:CreateDate="2018-05-14T15:56:03-07:00" xmp:ModifyDate="2018-05-14T16:17:02-07:00" xmp:MetadataDate="2018-05-14T16:17:02-07:00" dc:format="image/png" photoshop:ColorMode="3" photoshop:ICCProfile="sRGB IEC61966-2.1" xmpMM:InstanceID="xmp.iid:1cd127d2-b7a5-4c1f-ab4f-e3099dd7d126" xmpMM:DocumentID="adobe:docid:photoshop:7451094e-017a-f44c-9bd8-021d3bab82e8" xmpMM:OriginalDocumentID="xmp.did:0939ff2a-b2f0-4b59-8923-b4d677249905"> <xmpMM:History> <rdf:Seq> <rdf:li stEvt:action="created" stEvt:instanceID="xmp.iid:0939ff2a-b2f0-4b59-8923-b4d677249905" stEvt:when="2018-05-14T15:56:03-07:00" stEvt:softwareAgent="Adobe Photoshop CC 2018 (Macintosh)"/> <rdf:li stEvt:action="saved" stEvt:instanceID="xmp.iid:1cd127d2-b7a5-4c1f-ab4f-e3099dd7d126" stEvt:when="2018-05-14T16:17:02-07:00" stEvt:softwareAgent="Adobe Photoshop CC 2018 (Macintosh)" stEvt:changed="/"/> </rdf:Seq> </xmpMM:History> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end="r"?>U\u00A5\x12\u009C\x00\x00\x01\x0BIDAT8\u008D\u00ED\u0094\u00B1J\x041\x14E\u00CF\u00B8.\u00A8k%\x166\x16.\u0088?\u00A0\u00DFa\u00E3\x17\u00F8\x0F\u00FE\u0091\u0085\u009F\u00B0\u008D\u00A5`)b\u00B3*\u0082X\u0089\u0088\u00CD\u008A\u0088\u00BB\x1E\u008B\u0089Lf\u00C8\fY\u00D9\u00D2\x0B\u0081\u00E4\u00E5\u00DD;\u0099\u009B\u00F7R\u00A8,\x12K\u0099y#\u00E02\'q9Sp\x17\u00D8\u00CAI\u00CC=a6\u00FE\x05k\u00E8\u00BA\u00B0\u00DE\u00BC\u0082{\u00C0\x17p\x12\u00D63\u00E0;\u00CC\u008F\u0081)\u00B0\u009Fd\u00AA\u00A9\u00B1\u00AA>Y\u00E2P=Wo\u00D4\u00A3\x10{S7R\u00DC6A\u00D4\u009Ez\x1D\x04&\u00EAg\u0098\u00DF\u00A9\u00EBm\u00BC.A\u00D4\u00BEze\u0085q\u0097\u0098J\x11\u00F5\u00F2N\u00F0\u00E9\u00B1\u00E1\u00CA\x00\u00B8\x07\u00D6\u0080!\u00F0\u00DA\u00D8\u00DF\x06\u00FA\u00C0C\u00D3\u00C3g\u00F5\u00B6\u00E5\u00CB\u00830R{\x17\u00EA\u00ECw\x1D\u0097\u00C6f\u00B8\u00D9\x14\u00DE[\u00E2\x00+D\u00D5\x12\u0097\u00CD\u00B4\u0083\u00D4\u0085\u00DA\u00FB\x17\x0B\x16T\u00B56\x0Fj\u009C\u00F8\u0097_(\r>\u00A5\u00EC\u0084\u00D6n\u0088N\u00F6\x01\x1C\x00\u0093*Z\u0099{\u00E6\u00DF1J\u0095\u00CDB\u00F0\x03\u00B7\\m&\x00\u00BC\u00C4\u00F1\x00\x00\x00\x00IEND\u00AEB`\u0082';
@@ -176,8 +171,6 @@
     refreshMarkers();
   };
 
-
-
   var reloadBinaryString =
     '\u0089PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x14\x00\x00\x00\x14\b\x06\x00\x00\x00\u008D\u0089\x1D\r\x00\x00\x00\tpHYs\x00\x00\x0B\x13\x00\x00\x0B\x13\x01\x00\u009A\u009C\x18\x00\x00\x06\u00E0iTXtXML:com.adobe.xmp\x00\x00\x00\x00\x00<?xpacket begin="\u00EF\u00BB\u00BF" id="W5M0MpCehiHzreSzNTczkc9d"?> <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c140 79.160451, 2017/05/06-01:08:21        "> <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#" xmp:CreatorTool="Adobe Photoshop CC 2018 (Macintosh)" xmp:CreateDate="2018-05-14T15:56:03-07:00" xmp:ModifyDate="2018-05-14T16:17:13-07:00" xmp:MetadataDate="2018-05-14T16:17:13-07:00" dc:format="image/png" photoshop:ColorMode="3" photoshop:ICCProfile="sRGB IEC61966-2.1" xmpMM:DocumentID="adobe:docid:photoshop:a9c8bdd4-fecd-214c-80bd-cbaf4a29d21c" xmpMM:InstanceID="xmp.iid:b5634421-66b5-4b5c-8c2c-e17e4b2ab6e7" xmpMM:OriginalDocumentID="adobe:docid:photoshop:4bd636a3-36e4-1548-a9a2-092e04a5745c"> <xmpMM:History> <rdf:Seq> <rdf:li stEvt:action="created" stEvt:instanceID="xmp.iid:c26dece5-00cb-4996-9a38-fa59d75dca32" stEvt:when="2018-05-14T15:56:03-07:00" stEvt:softwareAgent="Adobe Photoshop CC 2018 (Macintosh)"/> <rdf:li stEvt:action="saved" stEvt:instanceID="xmp.iid:9c6227bc-cf69-4059-8ee5-5e6efbaacfdd" stEvt:when="2018-05-14T15:59:12-07:00" stEvt:softwareAgent="Adobe Photoshop CC 2018 (Macintosh)" stEvt:changed="/"/> <rdf:li stEvt:action="saved" stEvt:instanceID="xmp.iid:b5634421-66b5-4b5c-8c2c-e17e4b2ab6e7" stEvt:when="2018-05-14T16:17:13-07:00" stEvt:softwareAgent="Adobe Photoshop CC 2018 (Macintosh)" stEvt:changed="/"/> </rdf:Seq> </xmpMM:History> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end="r"?>\u00A2\u00B1\u0087\x19\x00\x00\x00\u00F1IDAT8\u008D\u00DD\u0094;J\x04A\x14EO\u008B\u00F8\x0B\u00C7@:2\x11\u008C\x0574\u00B8\x04\x17\u00E1\x16\f\\\u0080[\u00D0X\u008CGF\f5\x1016\x18\u00D0\x1E\u00F5\u0098<\u00B0[f\u00BA_\u00B7\u00D9\\(\u00EAU\u00D5}\u0087\u00FA\x17*\t\u008D\u0081M\u00E0\u00BC\u00CBX$\u0081\u00D3\x00\x1E\x02\u00ED\tjW\u00B9\u00F5Wwj\u00D1\u00E6\u00EF\u0082\u00DD\x04\u00E8C\u00AD"\u009E\f\x01\u008E\u00D4i\x00\u00C6\u00EAu\u00B4O\u00A2\u00EFQ\u00DD\u00EB\x03<\u0088\u00C4\u00B3h\u00DF\u00ABo\x11\u009F\u00C6\u00D8\u00D1\u00A2\u00DC\u00EC\u00A1<\x01%\u00B0\u00D5e\\\u00CB\u00D0\u0080/\u00E0;c\u00CC\x02\u00D3Z\x1D\u00E0\b\u00D8\u00CE\x18\u00D7kq\x19\u00F5\u00EB\x02\u00DF\x03\u00B0\u00BB\u0084Q\x06\u00E7\x19h\u00DC\u00C3\u0099\u00FA\u0092x\u008A\x7F\u00CB$\u00EE%jc\u0086;@\u0095YV\u00CB*\x1B{X\x01\u00B3\x01\u00C0\u00F7e\u00C0\r\u00E0\u00F3\u00BF\u00C0\u00FAt\u00E7\u00C0>pA\u00BF\x17t\u00DC\u00E8\u00A9m\u00EE\u00A5:w\u0098\u00AE\u00FA~\x0Ei\u00FD\x00J^\u00AB\u00D9\u00DB\u00BB\x01\u00CA\x00\x00\x00\x00IEND\u00AEB`\u0082';
   reloadMkrBtn = reloadGrp.add(
@@ -188,7 +181,6 @@
     ),
     { style: "toolbutton", toggle: 0 }
   );
-
 
   reloadMkrBtn.helpTip = "Reload Markers group from active comp";
   reloadMkrBtn.onClick = function() {
@@ -210,7 +202,6 @@
 
   mkrAddBtn = mrkPanel.add("button", [10, 10, 300, 30], "Add New Custom Group");
   mkrAddBtn.alignment = "center";
-
   mkrAddBtn.onClick = function() {
     addMarkerGrp(
       grpMarkersGrp,
@@ -221,7 +212,7 @@
     );
   };
 
-  //// COLLECT PANEL
+  ///// COLLECT PANEL
   collectPanel = win.add(
     "panel",
     [10, 375, 400, 435],
@@ -241,7 +232,7 @@
     //writeArrayToFile(LoopMarkers.layerMarkers);
   };
 
-  //// EXPORT PANEL
+  ///// EXPORT PANEL
   exportPanel = win.add("panel", [10, 375, 300, 120], "4 - EXPORT", {
     orientation: "column"
   });
@@ -280,7 +271,7 @@
     win.layout.resize();
   }
 
-  ///UPDATE UI EASILY TO REFLECT ADD/REMOVE CHANGES
+  ///// UI FUNCTIONS
   function updateUILayout(container) {
     container.layout.layout(true); //Update the container
     win.layout.layout(true); //Then update the main UI layout
@@ -300,55 +291,62 @@
 
   refreshMarkers();
 
-  ///ADD NEW MARKER GROUP
-
+/**
+ * Add all the defaults Presets Markers
+ */
   function addDefaultMarkers() {
     for (var def = 0; def < MARKERS_DEFAULTS.length; def++) {
       addDefaultMarkerGrp(grpMarkersGrp, MARKERS_DEFAULTS[def], def);
     }
+    function addDefaultMarkerGrp(parent, values, index) {
+      var newId = values.id;
+      var newText = values.text;
+      if (!newId) {
+        newId = MARKER_GROUPS_ARRAY.length;
+      }
+      if (!newText) {
+        newText = "group name " + newId.toString();
+      }
+      MARKER_GROUPS_ARRAY.push({ id: newId, text: newText });
+      var mkrGrp = parent.add("group", [0, 120, 385, 180], "Group Markers", {
+        orientation: "column",
+        alignment: "fill"
+      });
+      mkrBtn = mkrGrp.add("button", [0, 10, 20, 30], index);
+      mkrBtn.onClick = function() {
+        var radioValue = this.parent.children[2].children[0].value
+          ? "Left"
+          : "Right";
+        setMarker(this.parent.children[1].text.toLowerCase() + radioValue);
+      };
+      mkrBtn.helpTip = "Apply Group to Selected Layers";
+      mkrLabel = mkrGrp.add("statictext", [30, 10, 180, 30], newId, {
+        readonly: 1,
+        noecho: 0,
+        borderless: 0,
+        multiline: 0,
+        enterKeySignalsOnChange: 0,
+        wantReturn: true
+      });
+  
+      mkrSideGrp = mkrGrp.add("group", [0, 120, 385, 180], "Side");
+      mkrSideBtn1 = mkrSideGrp.add("radiobutton", undefined, "Left");
+      mkrSideBtn2 = mkrSideGrp.add("radiobutton", undefined, "Right");
+      mkrSideBtn1.value = true;
+      parent.orientation = "column";
+      parent.alignment = "fill";
+      mkrGrp.alignChildren = "left";
+      updateUILayout(parent); //Update UI
+    }
   }
 
-  function addDefaultMarkerGrp(parent, values, index) {
-    var newId = values.id;
-    var newText = values.text;
-    if (!newId) {
-      newId = MARKER_GROUPS_ARRAY.length;
-    }
-    if (!newText) {
-      newText = "group name " + newId.toString();
-    }
-    MARKER_GROUPS_ARRAY.push({ id: newId, text: newText });
-    var mkrGrp = parent.add("group", [0, 120, 385, 180], "Group Markers", {
-      orientation: "column",
-      alignment: "fill"
-    });
-    mkrBtn = mkrGrp.add("button", [0, 10, 20, 30], index);
-    mkrBtn.onClick = function() {
-      var radioValue = this.parent.children[2].children[0].value
-        ? "Left"
-        : "Right";
-      setMarker(this.parent.children[1].text.toLowerCase() + radioValue);
-    };
-    mkrBtn.helpTip = "Apply Group to Selected Layers";
-    mkrLabel = mkrGrp.add("statictext", [30, 10, 180, 30], newId, {
-      readonly: 1,
-      noecho: 0,
-      borderless: 0,
-      multiline: 0,
-      enterKeySignalsOnChange: 0,
-      wantReturn: true
-    });
-
-    mkrSideGrp = mkrGrp.add("group", [0, 120, 385, 180], "Side");
-    mkrSideBtn1 = mkrSideGrp.add("radiobutton", undefined, "Left");
-    mkrSideBtn2 = mkrSideGrp.add("radiobutton", undefined, "Right");
-    mkrSideBtn1.value = true;
-    parent.orientation = "column";
-    parent.alignment = "fill";
-    mkrGrp.alignChildren = "left";
-    updateUILayout(parent); //Update UI
-  }
-
+ 
+/**
+ * Add Custom Marker Groups to UI
+ * @param {Group} parent The parent UI Group to populate.
+ * @param {Object} values Object with id and text properties
+ * @param {Number} index The last Index of Children
+ */
   function addMarkerGrp(parent, values, index) {
     var newId = values.id;
     var newText = values.text;
@@ -360,14 +358,13 @@
     }
     MARKER_GROUPS_ARRAY.push({ id: newId, text: newText });
 
-    // switchButtonValue();
     var mkrGrp = parent.add("group", [0, 120, 385, 180], "Group Markers", {
       orientation: "column",
       alignment: "fill"
     });
     mkrBtn = mkrGrp.add("button", [10, 10, 30, 30], index);
     mkrBtn.onClick = function() {
-      //assignGroup(newId);
+      
       setMarker(this.parent.children[1].text.toLowerCase());
     };
     mkrBtn.helpTip = "Apply Group to Selected Layers";
@@ -379,19 +376,13 @@
       enterKeySignalsOnChange: 0,
       wantReturn: true
     });
-    //mkrLabel.onChanging = function(){$.writeln (newId + " selected.")};
-    // mkrLabel.addEventListener("keydown", function(kd) {
-    //   kd.preventDefault();
-    //   if (kd.keyName == "Up") {
-        
-    //     changeSubGroup(this.text, "+")
-       
-    //   }else if (kd.keyName == "Down") 
-    //   {
-    //     changeSubGroup(this.text, "-")
-    //   }
-    //  });
 
+
+/**
+ * Creates Subgroup Numbers with a # prefix
+ * @param {String} currentText Group Name
+ * @param {String} operator A string "+" || "-" to select subgroup
+ */
     function changeSubGroup(currentText, operator) {
       var hasSubGroup = currentText.split("#");
       var labelText;
@@ -417,7 +408,6 @@
       }
       return labelText;
     }
-
   
     minusString = "\u0089PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x14\x00\x00\x00\x14\b\x06\x00\x00\x00\u008D\u0089\x1D\r\x00\x00\x00\tpHYs\x00\x00\x0B\x13\x00\x00\x0B\x13\x01\x00\u009A\u009C\x18\x00\x00\x05 iTXtXML:com.adobe.xmp\x00\x00\x00\x00\x00<?xpacket begin=\"\u00EF\u00BB\u00BF\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?> <x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 5.6-c140 79.160451, 2017/05/06-01:08:21        \"> <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"> <rdf:Description rdf:about=\"\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:photoshop=\"http://ns.adobe.com/photoshop/1.0/\" xmlns:xmpMM=\"http://ns.adobe.com/xap/1.0/mm/\" xmlns:stEvt=\"http://ns.adobe.com/xap/1.0/sType/ResourceEvent#\" xmp:CreatorTool=\"Adobe Photoshop CC 2018 (Macintosh)\" xmp:CreateDate=\"2018-05-21T14:05:43-07:00\" xmp:ModifyDate=\"2018-05-21T14:06:49-07:00\" xmp:MetadataDate=\"2018-05-21T14:06:49-07:00\" dc:format=\"image/png\" photoshop:ColorMode=\"3\" photoshop:ICCProfile=\"sRGB IEC61966-2.1\" xmpMM:InstanceID=\"xmp.iid:6fc18e01-debd-49e9-9938-1d1ed851f4c8\" xmpMM:DocumentID=\"xmp.did:6fc18e01-debd-49e9-9938-1d1ed851f4c8\" xmpMM:OriginalDocumentID=\"xmp.did:6fc18e01-debd-49e9-9938-1d1ed851f4c8\"> <xmpMM:History> <rdf:Seq> <rdf:li stEvt:action=\"created\" stEvt:instanceID=\"xmp.iid:6fc18e01-debd-49e9-9938-1d1ed851f4c8\" stEvt:when=\"2018-05-21T14:05:43-07:00\" stEvt:softwareAgent=\"Adobe Photoshop CC 2018 (Macintosh)\"/> </rdf:Seq> </xmpMM:History> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end=\"r\"?>\u00A8\u00D3\u0090\t\x00\x00\x01lIDAT8\u008D\u00ED\u0094\u00BDJ\x03A\x14\u0085\u00CF\u009D\u00D9\ry\x0B\u009F@S\u00AB\u0089\u008D\u0095e,\x14|\x0F\u00DF@\u00D0\u00D2N\x1FA,SX\u00A5\x11\u0093\u0088\u0084\u0080&>\u0080\u0082`\x11bB\u008A\u00EC\u00C0\u00CE\u00DEca\x12\u00D6\u00CD\u008F\u00A0vz\u00AAa\u00EE\u00CC\u00C79\u0097;#$\u00F1\u009B2\u00BFJ\u00FB\u009B\u00C0`\u00B2\u00E8\u00F5zh6\u009B\x18\f\x06\u00C7\u00F9|\u00FEVU+\"2=(\"\x10\x11\u00A8*\u0092$A\x18\u00860\u00C6\x1C\x01x\u00F1\u00DE\u009F\u0097\u00CB\u00E5\u00CF\u00C08\u008E\x01`\x1F\u00C0!\u00C9;\x11\u00A9,r1\x06\u00AF\u0093<\x14\u0091W\u0092\u0097\x00\u00DE\u0080T\u00E4V\u00ABu\u00E6\u009C\u00BB\u00C8\u00E5r\x16\u00C0\x06\u0080\u00FB%\u00C96I6H\u00E6Tu\u0085duR\u0098\x02\u0087\u00C3\u00E1\u00B3\u00AA\u00C2\u0098\u00E9V\x01\u00C0\u00C3\x1C\u00D8\u00BA1\u00A66i\x07I\u0084a\u00F84\x03\x1C\u008DF'I\u0092\x14\u00D2}\x03\u00B0\u0096q\u00BA\x01\u00A0\u0091\u008E.\"5\u00E7\u00DC\u00EE\f\u00D0Z\x0B\x11i\x03X\u00CD8*\x00\u00A8\u0092\u00DCQ\u00D5z\x1A\u00A6\u00AA\u00B58\u008EKi\x13\u00F3\u00C6\u00E6q\fIk\x1B\u00C0U\x06V\u00F7\u00DE\u00972\u0089\x16\u00CEa\x1B\x1Fqgd\u008C\u0081\u00AA\u00DEx\u00EF\u008BY\u00D82 \x00t\u00D2NI\"\b\x028\u00E7\u00EA\u00FD~\x7F\u00CBZ;\u00F7\u00D2W/e\u00EA\u00D4Z\u008B(\u008A\u00AE\u00BB\u00DDnq2\u00E4\u00DF\x01\u0082dGD\x0E\u0082 8\u008D\u00A2hOU\u00B1\u00C8\x1D\x00\u00C8\u00FF\x7F\u00F8c\u00BD\x03\u00DA\x0B\u00A0\u009C\u00CE\u00C8G\u0091\x00\x00\x00\x00IEND\u00AEB`\u0082";
     mkrBtnMinus = mkrGrp.add("iconbutton",[10,10,30,30] ,ScriptUI.newImage (createResourceFile ("down.png", minusString, getUserDataFolder())),{style: "toolbutton", toggle:0} );
@@ -435,37 +425,19 @@
         "+"
       );
     };
-    //mkrLabel.onChanging = function(){$.writeln (newId + " selected.")};
+    
 
     parent.orientation = "column";
     mkrGrp.alignChildren = "left";
     updateUILayout(parent); //Update UI
   }
-
-  //// ADD MARKER GROUP TO LAYER
-
-  function assignGroup(id) {
-    var kids = grpMarkersGrp.children;
-    var btnGrp = kids[id].children;
-
-    if (id >= MARKERS_DEFAULTS.length) {
-      btnGrp = kids[id + MARKERS_DEFAULTS.length].children;
-    }
-
-    var grpObject = { id: id, text: btnGrp[1].text };
-    var curGrpObject = new Object();
-
-    if (id < MARKERS_DEFAULTS.length) {
-      curGrpObject = getByValue(MARKERS_DEFAULTS, text);
-    } else {
-      MARKER_GROUPS_ARRAY[id] = grpObject;
-      curGrpObject = getByValue(MARKER_GROUPS_ARRAY, text);
-    }
-
-    setMarker(curGrpObject.text.toLowerCase());
-    refreshMarkers();
-  }
-
+  
+  /**
+   * Update all Markers in the comp with the latest name in the UI
+   * @param {String} curText The current name of the group
+   * @param {Number} id The index of the group in the UI
+   * @param {String} text New Text to assign
+   */
   function updateGroupMarkerText(curText, id, text) {
     var currentMarkers = LoopMarkers.getMarkers(app.project.activeItem);
 
@@ -493,8 +465,10 @@
     updateUILayout(group2); //Update UI
   }
 
-  //// REMOVE GROUPS FROM UI
-
+  /**
+   * Remove all children from a UI Group
+   * @param {Group} parent The UI Group to clear
+   */
   function removeAllChildren(parent) {
     var kids = parent.children;
     var numKids = kids.length;
@@ -504,20 +478,12 @@
       parent.remove(kids[numKids - 1]);
       numKids--;
     }
-    updateUILayout(parent); //Update UI
+    updateUILayout(parent); 
   }
 
-  //// SWITCH Marker Btn Status to Disable
-  // function switchButtonValue() {
-  //   var kids = grpMarkersGrp.children;
-  //   for (var k = MARKERS_DEFAULTS.length; k < kids.length; k++) {
-  //     var btnGrp = kids[k].children;
-  //     btnGrp[2].enabled = false;
-  //     btnGrp[2].text = "-"; //Remove last child in the container
-  //   }
-  // }
-
-  //// SHOW EXPORT DETAIL PANEL
+/** Show or Hide The Export Panel
+ * 
+ */
   function showHideExportDetails() {
     if (!EXPORT_DETAILS_VISIBLE) {
       var g = expDetailGrp.add("group", [0, 70, 260, 430], "undefined"); //Add a group
@@ -653,7 +619,9 @@
     //Log.trace("<-- setMarker: " + String(markerComment));
   }
 
-  //// GET ALL MARKERS FROM PROJECT
+/**
+ * Read all Markers in Comp to create a new list and update the UI - (Recursive)
+ */
   function refreshMarkers() {
     removeAllChildren(grpMarkersGrp);
     LoopMarkers.resetMarkers();
@@ -683,6 +651,11 @@
     }
   }
 
+
+/**
+ * Create a text file with a list of all markers
+ * @param {Array} arr 
+ */
   function writeArrayToFile(arr) {
     var curAppFile = app.project.file;
     var tmpPath = curAppFile.parent;
@@ -703,7 +676,9 @@
   ///////////// END FUNCTIONS ////////////
   ////////////////////////////////////////
 
-  //// UTILS
+  ////////////////////////////////////////
+  ///////////// UTILS ////////////////////
+  ////////////////////////////////////////
   function findInArray(arr, val) {
     var found = false;
     for (var i = 0; i < arr.length; i++) {
