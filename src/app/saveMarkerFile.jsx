@@ -2,7 +2,7 @@
 var SaveMarkerFile = (function() {
 
   function saveFile (content,filepath) {
-    app.beginUndoGroup("rename Layers");
+    
     
     var write_file = File (filepath);
     if (!write_file.exists) {
@@ -37,8 +37,33 @@ var SaveMarkerFile = (function() {
     }
 
 }
-app.endUndoGroup();
+
+/**
+   * Create a text file with a list of all markers
+   * @param {Array} arr
+   */
+  function writeArrayToFile(arr) {
+    app.beginUndoGroup("rename Layers");
+    
+    var curAppFile = app.project.file;
+    if(curAppFile){
+      var tmpPath = curAppFile.parent;
+      var parentFolder = tmpPath.parent;
+      var filepath =
+        parentFolder.fsName + "/" + curAppFile.displayName.split(".")[0] + ".txt";
+      var textOutput = "MARKER LIST\n";
+  
+      for (var e = 0; e < arr.length; e++) {
+        var line = "\n" + arr[e].id + " - " + arr[e].text;
+        textOutput += line;
+      }
+  
+      saveFile(textOutput, filepath);
+    }
+    app.endUndoGroup();
+  }
+
   return {
-    saveFile : saveFile
+    writeArrayToFile : writeArrayToFile
   };
 })();

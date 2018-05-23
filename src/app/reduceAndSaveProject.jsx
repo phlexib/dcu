@@ -35,6 +35,7 @@ var ReduceAndSaveProject = (function() {
   }
 
   function reduceSave() {
+    app.project.save();
     var mp4File = renderMp4();
     var projectTokens = app.project.file.displayName.split("_");
     var sName = projectTokens[0] + "_" + projectTokens[1] + "_JSON";
@@ -355,19 +356,19 @@ var ReduceAndSaveProject = (function() {
     app.project.save(newFile);
   }
 
+  function findComp(compName) {
+    for (i = 1; i <= app.project.numItems; i++) {
+      var curItem = app.project.item(i);
+      if (curItem instanceof CompItem && curItem.name == compName) {
+        return curItem;
+        break;
+      }
+    }
+  }
+
   return {
     reduceSave: reduceSave
   };
 })();
 
-function findComp(compName) {
-  for (i = 1; i <= app.project.numItems; i++) {
-    var curItem = app.project.item(i);
-    if (curItem instanceof CompItem && curItem.name == compName) {
-      return curItem;
-      break;
-    }
-  }
-}
 
-//  ReduceAndSaveProject.reduceSave();

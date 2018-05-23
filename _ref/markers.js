@@ -1,97 +1,33 @@
 var Markers = (function () { // eslint-disable-line no-unused-vars
 
- /**
+  /**
    * Creates marker with comment set to argument
    *
    * @param {String} markerComment - Comment to set on marker
+   * @param {String} markerChapter - Comment to set on marker
    */
-  function setMarker(markerComment) {
-    //Log.trace("--> setMarker: " + String(markerComment));
-    app.beginUndoGroup("Make Makers");
-    saveScriptSettings();
-    var comp = aeq.getActiveComp();
+  function setMarker (markerComment,markerChapter) {
+      Log.trace("--> setMarker: " + String(markerComment));
+      app.beginUndoGroup("Make Makers");
 
-    if (!aeq.isComp(comp)) {
-      var msg = "Please activate a comp before making markers.";
-      alert(msg);
-      // Log.warning("<-- setMarker: " + msg);
-      return;
-    }
+      var comp = aeq.getActiveComp();
 
-    var selectedLayers = aeq.getSelectedLayers(comp);
-    if (selectedLayers.length < 1) {
-      alert("Select a layer before assigning a marker.");
-    } else {
-      selectedLayers.forEach(function(layer) {
-        var marker = new MarkerValue(markerComment);
-        var markerTime = comp.time;
-        var hasCloseKeyframe = false;
-        var markerExists = false;
-        var hasAlignment = false;
+      if (!aeq.isComp(comp)) {
+          var msg = "Please activate a comp before making markers.";
+          alert(msg);
+          Log.warning("<-- setMarker: " + msg);
+          return;
+      }
 
-        if (
-          markerTime < comp.displayStartTime ||
-          markerTime < comp.displayStartTime + comp.duration
-        ) {
-          markerTime = comp.displayStartTime;
-        }
-
-        for (var i = 1; i <= layer.property("Marker").numKeys; i++) {
-          if (layer.property("Marker").keyValue(i).comment === markerComment) {
-            markerExists = true;
-            alert('Layer already has a marker "' + markerComment + '"');
-            continue;
-          }
-
-          if (
-            (markerComment === "textVAlign=.5" ||
-              markerComment === "textVAlign=1") &&
-            (layer.property("Marker").keyValue(i).comment === "textVAlign=.5" ||
-              layer.property("Marker").keyValue(i).comment === "textVAlign=1")
-          ) {
-            var res = confirm(
-              "Layer already has an Alignment marker. Do you want to overwrite it",
-              true,
-              "Updating alignment marker"
-            );
-            // if the user hits no stop the script
-            if (res !== true) {
-              return;
-            } else {
-              markerExists = true;
-              hasAlignment = true;
-              var updateMarker = new MarkerValue(markerComment);
-              aeq
-                .getMarkerGroup(layer)
-                .setValueAtTime(
-                  layer.property("Marker").keyTime(i),
-                  updateMarker
-                );
-              refreshMarkers();
-              continue;
-            }
-          }
-          if (
-            layer.property("Marker").keyTime(i) >= markerTime - 0.5 &&
-            layer.property("Marker").keyTime(i) <= markerTime + 0.5
-          ) {
-            hasCloseKeyframe = true;
-            markerTime += 0.5;
-          }
-        }
-
-        var marker = new MarkerValue(markerComment);
-
-        if (markerExists === false && hasAlignment === false) {
-          aeq.getMarkerGroup(layer).setValueAtTime(markerTime, marker);
-        }
+      aeq.getSelectedLayers(comp).forEach(function (layer) {
+          var marker = new MarkerValue(markerComment,"markerChapter");
+          alert(markerComment,markerChapter);
+          aeq.getMarkerGroup(layer).setValueAtTime(comp.time, marker);
       });
-      refreshMarkers();
-    }
-    app.endUndoGroup();
-    //Log.trace("<-- setMarker: " + String(markerComment));
-  }
 
+      app.endUndoGroup();
+      Log.trace("<-- setMarker: " + String(markerComment));
+  }
 
   /**
    * Removes all markers on selected layers

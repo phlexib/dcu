@@ -4,19 +4,12 @@
   ///// Globals Variables
   
   var EXPORT_DETAILS_VISIBLE = false;
-  
+  var SCRIPTNAME = "BUILD:REPLACE{{pkg.name}}";
+  var SCRIPTVERSION = "BUILD:REPLACE{{pkg.version}}";
+  var MARKERS_DEFAULTS = DC_Gobals.MARKERS_DEFAULTS;
+  var SUBGROUP = DC_Gobals.SUBGROUPS;
   var MARKER_GROUPS_ARRAY = [];
-  var SCRIPTNAME = "DC To Json User";
-  var SCRIPTVERSION = "1.0.0";
-  var MARKERS_DEFAULTS = [
-    { id: "Script", text: "Script" },
-    { id: "Location", text: "Location" },
-    { id: "Comment", text: "Comment" },
-    { id: "Reaction", text: "Reaction" },
-    { id: "Date", text: "Date" }
-  ];
-  var SUBGROUP = ["",1, 2, 3,4, 5, 6,7, 8, 9,10, 11, 12];
-
+  
   ///// START UI
   var win = buildUI(thisObj);
   function buildUI(thisObj) {
@@ -91,7 +84,7 @@
     "iconbutton",
     [20, 00, 40, 20],
     ScriptUI.newImage(
-      createResourceFile("wow.png", wowString, getUserDataFolder())
+      DCTools.createResourceFile("wow.png", wowString, DCTools.getUserDataFolder())
     ),
     { style: "toolbutton", toggle: 0 }
   );
@@ -105,7 +98,7 @@
     "iconbutton",
     [20, 00, 40, 20],
     ScriptUI.newImage(
-      createResourceFile("love.png", loveString, getUserDataFolder())
+      DCTools.createResourceFile("love.png", loveString, DCTools.getUserDataFolder())
     ),
     { style: "toolbutton", toggle: 0 }
   );
@@ -118,7 +111,7 @@
     "iconbutton",
     [20, 00, 40, 20],
     ScriptUI.newImage(
-      createResourceFile("like.png", likeString, getUserDataFolder())
+      DCTools.createResourceFile("like.png", likeString, DCTools.getUserDataFolder())
     ),
     { style: "toolbutton", toggle: 0 }
   );
@@ -131,7 +124,7 @@
     "iconbutton",
     [20, 00, 40, 20],
     ScriptUI.newImage(
-      createResourceFile("haha.png", hahaString, getUserDataFolder())
+      DCTools.createResourceFile("haha.png", hahaString, DCTools.getUserDataFolder())
     ),
     { style: "toolbutton", toggle: 0 }
   );
@@ -150,7 +143,7 @@
     "iconbutton",
     [20, 00, 40, 20],
     ScriptUI.newImage(
-      createResourceFile("assign.png", assignString, getUserDataFolder())
+      DCTools.createResourceFile("assign.png", assignString, DCTools.getUserDataFolder())
     ),
     { style: "toolbutton", toggle: 0 }
   );
@@ -160,13 +153,13 @@
     var currentMarkers = LoopMarkers.getMarkers(app.project.activeItem);
     for (
       var mark = MARKERS_DEFAULTS.length;
-      mark < grpMarkersGrp.children.length;
+      mark < markersUI_grp.children.length;
       mark++
     ) {
       var oldText = currentMarkers[mark - MARKERS_DEFAULTS.length].text;
-      var kids = grpMarkersGrp.children;
+      var kids = markersUI_grp.children;
       var btnGrp = kids[mark].children;
-      updateGroupMarkerText(oldText, btnGrp[0].text, btnGrp[1].text);
+      updateGroupsNameFromUiToLayers(oldText, btnGrp[0].text, btnGrp[1].text);
     }
     refreshMarkers();
   };
@@ -177,20 +170,20 @@
     "iconbutton",
     [20, 00, 40, 20],
     ScriptUI.newImage(
-      createResourceFile("upload.png", reloadBinaryString, getUserDataFolder())
+      DCTools.createResourceFile("upload.png", reloadBinaryString, DCTools.getUserDataFolder())
     ),
     { style: "toolbutton", toggle: 0 }
   );
 
   reloadMkrBtn.helpTip = "Reload Markers group from active comp";
   reloadMkrBtn.onClick = function() {
-    removeAllChildren(grpMarkersGrp);
+    removeAllChildren(markersUI_grp);
     LoopMarkers.resetMarkers();
     refreshMarkers();
   };
   reloadMkrBtn.alignment = "right";
 
-  var grpMarkersGrp = mrkPanel.add(
+  var markersUI_grp = mrkPanel.add(
     "group",
     [10, 115, 385, 200],
     "Group Markers",
@@ -204,11 +197,11 @@
   mkrAddBtn.alignment = "center";
   mkrAddBtn.onClick = function() {
     addMarkerGrp(
-      grpMarkersGrp,
+      markersUI_grp,
       {
-        text: "new group " + grpMarkersGrp.children.length
+        text: "new group " + markersUI_grp.children.length
       },
-      grpMarkersGrp.children.length
+      markersUI_grp.children.length
     );
   };
 
@@ -228,8 +221,11 @@
     "- Reduce\n - Collect.\n- Stage Project.\n- Save to CC (13) (A dialog Window will show up).\n- Render h264 file in Render/_out folder. \n- Save Markers Description Text file.";
   collectBtn.onClick = function() {
     ReduceAndSaveProject.reduceSave();
-    LoopMarkers.layerMarkers;
-    //writeArrayToFile(LoopMarkers.layerMarkers);
+    
+    function prepArrayForText (){
+
+    }
+    // SaveMarkerFile.writeArrayToFile(LoopMarkers.getMarkers(app.project.activeItem));
   };
 
   ///// EXPORT PANEL
@@ -296,8 +292,9 @@
    */
   function addDefaultMarkers() {
     for (var def = 0; def < MARKERS_DEFAULTS.length; def++) {
-      addDefaultMarkerGrp(grpMarkersGrp, MARKERS_DEFAULTS[def], def);
+      addDefaultMarkerGrp(markersUI_grp, MARKERS_DEFAULTS[def], def);
     }
+
     function addDefaultMarkerGrp(parent, values, index) {
       var newId = values.id;
       var newText = values.text;
@@ -308,6 +305,7 @@
         newText = "group name " + newId.toString();
       }
       MARKER_GROUPS_ARRAY.push({ id: newId, text: newText });
+
       var mkrGrp = parent.add("group", [0, 120, 385, 180], "Group Markers", {
         orientation: "column",
         alignment: "fill"
@@ -430,6 +428,7 @@
       return labelText;
     }
 
+    ////// Creates Dropdown Menu for subgroups.
     var subList = mkrGrp.add ("dropdownlist", [0,0,50,10], SUBGROUP); 
     subList.selection = 0;
     if(values.hasOwnProperty("subGroups")){
@@ -464,12 +463,12 @@
    * @param {Number} id The index of the group in the UI
    * @param {String} text New Text to assign
    */
-  function updateGroupMarkerText(curText, id, text) {
+  function updateGroupsNameFromUiToLayers(curText, id, text) {
     var currentMarkers = LoopMarkers.getMarkers(app.project.activeItem);
 
     for (var m = 0; m < currentMarkers.length; m++) {
       if (currentMarkers[m].text == curText) {
-        var layerComp = findItemById(currentMarkers[m].comp);
+        var layerComp = DCTools.findItemById(currentMarkers[m].comp);
         var layerToSet = layerComp.layer(currentMarkers[m].layerIndex);
         var updatedMarker = new MarkerValue(text);
         layerToSet
@@ -482,11 +481,11 @@
   //// REMOVE MARKERS
 
   function removeMarkerGroup(id) {
-    var kids = grpMarkersGrp.children;
+    var kids = markersUI_grp.children;
     var numKids = kids.length;
     if (numKids > 0) {
       //Verify that at least one child exists
-      grpMarkersGrp.remove(kids[id]);
+      markersUI_grp.remove(kids[id]);
     }
     updateUILayout(group2); //Update UI
   }
@@ -561,7 +560,8 @@
   function setMarker(markerComment) {
     //Log.trace("--> setMarker: " + String(markerComment));
     app.beginUndoGroup("Make Makers");
-    saveScriptSettings();
+
+    DCSettings.saveScriptSettings(markersUI_grp,MARKERS_DEFAULTS);
     var comp = aeq.getActiveComp();
 
     if (!aeq.isComp(comp)) {
@@ -650,13 +650,13 @@
    */
   function refreshMarkers() {
     
-    removeAllChildren(grpMarkersGrp);
+    removeAllChildren(markersUI_grp);
     LoopMarkers.resetMarkers();
     var groupMarkers = LoopMarkers.getMarkers(app.project.activeItem);
     addDefaultMarkers();
     if (groupMarkers.length < 1) {
       addMarkerGrp(
-        grpMarkersGrp,
+        markersUI_grp,
         { id: "1", text: "group 1" },
         MARKERS_DEFAULTS.length + 1
       );
@@ -664,7 +664,7 @@
       var unique = [];
       for (var u = 0; u < groupMarkers.length; u++) {
         
-        var found = findInArray(unique,groupMarkers[u].text);
+        var found = DCTools.findInArray(unique,groupMarkers[u].text);
         
         if (found <0) {
           unique.push(groupMarkers[u]);
@@ -690,154 +690,12 @@
      
       MARKER_GROUPS_ARRAY = [];
       for (var m = 0; m < unique.length; m++) {
-        addMarkerGrp(grpMarkersGrp, unique[m], MARKERS_DEFAULTS.length + m);
+        addMarkerGrp(markersUI_grp, unique[m], MARKERS_DEFAULTS.length + m);
       }
-      readScriptSettings();
+
+      DCSettings.readScriptSettings(markersUI_grp,MARKERS_DEFAULTS);
   }
   
 }
 
-  /**
-   * Create a text file with a list of all markers
-   * @param {Array} arr
-   */
-  function writeArrayToFile(arr) {
-    var curAppFile = app.project.file;
-    var tmpPath = curAppFile.parent;
-    var parentFolder = tmpPath.parent;
-    var filepath =
-      parentFolder.fsName + "/" + curAppFile.displayName.split(".")[0] + ".txt";
-    var textOutput = "MARKER LIST\n";
-
-    for (var e = 0; e < arr.length; e++) {
-      var line = "\n" + arr[e].id + " - " + arr[e].text;
-      textOutput += line;
-    }
-
-    SaveMarkerFile.saveFile(textOutput, filepath);
-  }
-
-  ////////////////////////////////////////
-  ///////////// END FUNCTIONS ////////////
-  ////////////////////////////////////////
-
-  ////////////////////////////////////////
-  ///////////// UTILS ////////////////////
-  ////////////////////////////////////////
-  function findInArray(arr, val) {
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i].text === val) {
-        return i;
-      }
-    }
-  }
-
-  function findItemById(id) {
-    for (var item = 1; item <= app.project.numItems; item++) {
-      var curItem = app.project.item(item);
-      if (curItem.id === id) {
-        return curItem;
-        break;
-      }
-    }
-  }
-
-  function isWindows() {
-    return $.os.indexOf("Windows") != -1;
-  }
-
-  function getByValue(arr, value) {
-    for (var i = 0; i < MARKER_GROUPS_ARRAY.length; i++) {
-      if (arr[i].text == value) return arr[i];
-    }
-  }
-  function getIndexByValue(arr, value) {
-    for (var i = 0; i < MARKER_GROUPS_ARRAY.length; i++) {
-      if (arr[i].text == value) return i;
-    }
-  }
-
-  function sortArray(a, b) {
-    return (a.id > b.id) - (a.id < b.id);
-  }
-
-  function getUserDataFolder() {
-    var userDataFolder = Folder.userData;
-    var aescriptsFolder = Folder(
-      userDataFolder.toString() + "/Buck/images/yourImg"
-    );
-    if (!aescriptsFolder.exists) {
-      var checkFolder = aescriptsFolder.create();
-      if (!checkFolder) {
-        alert("Error creating ");
-        aescriptsFolder = Folder.temp;
-      }
-    }
-    return aescriptsFolder.toString();
-  }
-
-  function createResourceFile(filename, binaryString, resourceFolder) {
-    var myFile = new File(resourceFolder + "/" + filename);
-    if (!File(myFile).exists) {
-      if (!isSecurityPrefSet()) {
-        alert(
-          "This script requires access to write files. Go to the  General  panel of the application preferences and make sure  Allow Scripts to Write Files and Access Network  is checked."
-        );
-        try {
-          app.executeCommand(2359);
-        } catch (e) {
-          alert(e);
-        }
-        if (!isSecurityPrefSet()) return null;
-      }
-      myFile.encoding = "BINARY";
-      myFile.open("w");
-      myFile.write(binaryString);
-      myFile.close();
-    }
-    return myFile;
-  }
-  function isSecurityPrefSet() {
-    try {
-      var securitySetting = app.preferences.getPrefAsLong(
-        "Main Pref Section",
-        "Pref_SCRIPTING_FILE_NETWORK_SECURITY"
-      );
-      return securitySetting == 1;
-    } catch (e) {
-      return (securitySetting = 1);
-    }
-  }
-
-  function saveScriptSettings(){
-    var sectionName = "DCTOJSON-UI";
-    try{
-      for( var s = 0 ; s <MARKERS_DEFAULTS.length; s++){
-        var value = grpMarkersGrp.children[s].children[2].children[0].value;
-       app.settings.saveSetting(sectionName, MARKERS_DEFAULTS[s].id, value);
-      }
-      
-    }catch(e){
-      alert(e);
-    }
-    
-     
-  }
-
-  function readScriptSettings(){
-    var sectionName = "DCTOJSON-UI";
-    try{
-      for( var s = 0 ; s <MARKERS_DEFAULTS.length; s++){
-       var curSetting = app.settings.getSetting(sectionName, MARKERS_DEFAULTS[s].id);
-             if(curSetting === "true"){
-        grpMarkersGrp.children[s].children[2].children[0].value = true;
-       }else{
-        grpMarkersGrp.children[s].children[2].children[1].value = true;
-       }
-      }
-
-    }catch(e){
-
-    }
-  }
 })(this);

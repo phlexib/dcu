@@ -30,7 +30,6 @@
           }
       }
       
-    
       function isWindows() {
         return $.os.indexOf("Windows") != -1;
       }
