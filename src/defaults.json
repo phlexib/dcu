@@ -1,16 +1,15 @@
 {
-  "id": "Script",
-  "text": "Script"
-},
-{
-  "id": "Location",
-  "text": "Location"
-},
-{
-  "id": "Comment",
-  "text": "Comment"
-},
-{
-  "id": "Reaction",
-  "text": "Reaction"
+  {
+    "id": "Script",
+    "text": "Script"
+  }, {
+    "id": "Location",
+    "text": "Location"
+  }, {
+    "id": "Comment",
+    "text": "Comment"
+  }, {
+    "id": "Reaction",
+    "text": "Reaction"
+  }
 }

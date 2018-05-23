@@ -28,7 +28,7 @@ function getMarkers(curComp) {
 
   //// find markers on layer
 function checkLayerMarkers(layer,curComp) {
-   
+  var groupTxt = [];
   markerProps = layer.property("Marker");
   var digit = /^\d/g;
   for (var i = 1; i <= markerProps.numKeys; i++) {
@@ -39,11 +39,28 @@ function checkLayerMarkers(layer,curComp) {
     marker.time = markerProps.keyTime(i);
     marker.layerIndex = layer.index;
     marker.comp = curComp.id;
+
+    marker.sub = 0;
+    var subGroup = /(^\w+)(_\d+$)/;
+
+    if(marker.text.match(subGroup)){ 
+      var matchSubGroup = marker.text.match(subGroup);
+      var groupName = matchSubGroup[1];
+      var subGroupString = (matchSubGroup[2]);
+      var subGroupNumber = parseInt(subGroupString.match(/\d+/));
+      marker.text = groupName;
+      marker.sub = subGroupNumber;
+      
+    }
+   
     layerMarkers.push(marker);
-    var defaults = /dynamic|textVAlign|script|location|reaction|comment|date|_\d$/g  
+
+    var defaults = /dynamic|textVAlign|script|location|reaction|comment|date/g ;
     if(!(marker.text.match(defaults))){ 
-      groupMarkers.push(marker)
-      grpMarkers.push(marker)}
+      groupMarkers.push(marker);
+      grpMarkers.push(marker);
+     
+    }
 
   }
 }

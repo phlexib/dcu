@@ -2,6 +2,7 @@
   ImportScript.runScript("dynamicContentToJSON/dynamicContentToJSON.jsx");
 
   ///// Globals Variables
+  
   var EXPORT_DETAILS_VISIBLE = false;
   
   var MARKER_GROUPS_ARRAY = [];
@@ -14,7 +15,7 @@
     { id: "Reaction", text: "Reaction" },
     { id: "Date", text: "Date" }
   ];
-  var SUBGROUP = ["","1", "2", "3","4", "5", "6","7", "8", "9","10", "11", "12"];
+  var SUBGROUP = ["",1, 2, 3,4, 5, 6,7, 8, 9,10, 11, 12];
 
   ///// START UI
   var win = buildUI(thisObj);
@@ -360,12 +361,12 @@
       orientation: "column",
       alignment: "fill"
     });
-    mkrBtn = mkrGrp.add("button", [10, 10, 30, 30], index);
+    mkrBtn = mkrGrp.add("button", [0, 10, 20, 30], index);
     mkrBtn.onClick = function() {
       setMarker(this.parent.children[1].text.toLowerCase());
     };
     mkrBtn.helpTip = "Apply Group to Selected Layers";
-    mkrLabel = mkrGrp.add("edittext", [30, 10, 215, 30], newText, {
+    mkrLabel = mkrGrp.add("edittext", [30, 10, 220, 30], newText, {
       readonly: 0,
       noecho: 0,
       borderless: 0,
@@ -374,23 +375,23 @@
       wantReturn: true
     });
 
-    mkrLabel.addEventListener("keydown", function(k) {
-      handle_key(k, this);
-    });
-    
-    function handle_key(key, control) {
+    mkrLabel.addEventListener("keydown", function(key) {
       switch (key.keyName) {
         case "Up":
-        control.text = changeSubGroup(control.text,"+");
+        key.currentTarget.text = changeSubGroup(key.currentTarget.text,"+");
+        var list =  key.currentTarget.parent.children[2];
+        list.selection = list.selection.index+1;
+        
           break;
         case "Down":
-        control.text = changeSubGroup(control.text,"-");
+        key.currentTarget.text = changeSubGroup(key.currentTarget.text,"-");
+        var list =  key.currentTarget.parent.children[2];
+        list.selection = list.selection.index-1;
           break;
         default:
           break;
       }
-    }
-      
+    });
 
     /**
      * Creates Subgroup Numbers with a # prefix
@@ -402,7 +403,6 @@
       var hasSubGroup = currentText.match(lookupPattern);
       var newSubGroupNumber = (curSubGroup+1).toString()
       
-     
       if (hasSubGroup) {
         var curSubGroup = parseInt(hasSubGroup);
         var labelText;
@@ -420,6 +420,7 @@
             }
             break;
           default:
+          labelText = currentText.replace(lookupPattern,"");
             break;
         }
       } else {
@@ -428,18 +429,31 @@
       return labelText;
     }
 
-    var subList = mkrGrp.add ("dropdownlist", undefined, SUBGROUP); 
+    var subList = mkrGrp.add ("dropdownlist", [0,0,50,10], SUBGROUP); 
     subList.selection = 0;
-    subList.items[1].checked = true;
-    subList.items[3].checked = true;
-    subList.onChange =  function () { 
-      
+    if(values.hasOwnProperty("subGroups")){
+      for(var sub =0; sub <values.subGroups.length ; sub ++){
+        var subNumber = values.subGroups[sub]
+        subList.items[subNumber].checked = true;
+      }
+      subList.selection = values.subGroups.length;
+      var hasSubGroup = subList.parent.children[1].text.split("_");
+      subList.parent.children[1].text =  hasSubGroup[0]+"_"+String(subList.selection);
+    }
+    
+    subList.onChange =  function () {
       var hasSubGroup = this.parent.children[1].text.split("_");
       var labelText;
-      this.parent.children[1].text =  hasSubGroup[0] + "_"+ parseInt(this.selection);
+      if(subList.selection === ""){
+        this.parent.children[1].text =  hasSubGroup[0];
+      }else{
+        this.parent.children[1].text =  hasSubGroup[0] + "_"+ parseInt(this.selection);
+      }
     }
+    
     parent.orientation = "column";
     mkrGrp.alignChildren = "left";
+    parent.alignment = "left";
     updateUILayout(parent); //Update UI
   }
 
@@ -645,22 +659,40 @@
         MARKERS_DEFAULTS.length + 1
       );
     } else {
-      var unique = new Array();
-
+      var unique = [];
       for (var u = 0; u < groupMarkers.length; u++) {
-        if (findInArray(unique, groupMarkers[u].text) === false) {
+        
+        var found = findInArray(unique,groupMarkers[u].text);
+        
+        if (found <0) {
           unique.push(groupMarkers[u]);
-        }
+          if(groupMarkers[u].sub !=0){
+            var newSubGroup = [groupMarkers[u].sub]
+            unique[unique.length-1].subGroups = newSubGroup;
+          }
+        } 
+        
+        if(found >=0) {
+          if(unique[found].hasOwnProperty("subGroups")){
+            unique[found].subGroups.push(groupMarkers[u].sub)
+          }else{
+            var newSubGroup = [groupMarkers[u].sub]
+            unique[found].subGroups = newSubGroup;
+          }
+         
       }
       unique.sort(function(a, b) {
         return (a.id > b.id) - (a.id < b.id);
       });
+    }
+     
       MARKER_GROUPS_ARRAY = [];
       for (var m = 0; m < unique.length; m++) {
         addMarkerGrp(grpMarkersGrp, unique[m], MARKERS_DEFAULTS.length + m);
       }
-    }
+    
   }
+}
 
   /**
    * Create a text file with a list of all markers
@@ -690,14 +722,11 @@
   ///////////// UTILS ////////////////////
   ////////////////////////////////////////
   function findInArray(arr, val) {
-    var found = false;
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].text === val) {
-        found = true;
-        return found;
+        return i;
       }
     }
-    return found;
   }
 
   function findItemById(id) {
