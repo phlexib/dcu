@@ -364,6 +364,7 @@
     mkrBtn = mkrGrp.add("button", [0, 10, 20, 30], index);
     mkrBtn.onClick = function() {
       setMarker(this.parent.children[1].text.toLowerCase());
+      
     };
     mkrBtn.helpTip = "Apply Group to Selected Layers";
     mkrLabel = mkrGrp.add("edittext", [30, 10, 220, 30], newText, {
@@ -560,7 +561,7 @@
   function setMarker(markerComment) {
     //Log.trace("--> setMarker: " + String(markerComment));
     app.beginUndoGroup("Make Makers");
-
+    saveScriptSettings();
     var comp = aeq.getActiveComp();
 
     if (!aeq.isComp(comp)) {
@@ -648,6 +649,7 @@
    * Read all Markers in Comp to create a new list and update the UI - (Recursive)
    */
   function refreshMarkers() {
+    
     removeAllChildren(grpMarkersGrp);
     LoopMarkers.resetMarkers();
     var groupMarkers = LoopMarkers.getMarkers(app.project.activeItem);
@@ -690,8 +692,9 @@
       for (var m = 0; m < unique.length; m++) {
         addMarkerGrp(grpMarkersGrp, unique[m], MARKERS_DEFAULTS.length + m);
       }
-    
+      readScriptSettings();
   }
+  
 }
 
   /**
@@ -803,6 +806,38 @@
       return securitySetting == 1;
     } catch (e) {
       return (securitySetting = 1);
+    }
+  }
+
+  function saveScriptSettings(){
+    var sectionName = "DCTOJSON-UI";
+    try{
+      for( var s = 0 ; s <MARKERS_DEFAULTS.length; s++){
+        var value = grpMarkersGrp.children[s].children[2].children[0].value;
+       app.settings.saveSetting(sectionName, MARKERS_DEFAULTS[s].id, value);
+      }
+      
+    }catch(e){
+      alert(e);
+    }
+    
+     
+  }
+
+  function readScriptSettings(){
+    var sectionName = "DCTOJSON-UI";
+    try{
+      for( var s = 0 ; s <MARKERS_DEFAULTS.length; s++){
+       var curSetting = app.settings.getSetting(sectionName, MARKERS_DEFAULTS[s].id);
+             if(curSetting === "true"){
+        grpMarkersGrp.children[s].children[2].children[0].value = true;
+       }else{
+        grpMarkersGrp.children[s].children[2].children[1].value = true;
+       }
+      }
+
+    }catch(e){
+
     }
   }
 })(this);
