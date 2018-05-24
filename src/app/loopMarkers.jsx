@@ -56,7 +56,7 @@ var LoopMarkers = (function() {
         layerMarkers.push(marker);
 
         var skipString = /dynamic|textVAlign|script|location|reaction|comment|date/g;
-        if (!marker.text.match(defaults)) {
+        if (!marker.text.match(skipString)) {
           groupMarkers.push(marker);
           grpMarkers.push(marker);
         }
