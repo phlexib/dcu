@@ -3,15 +3,14 @@ var ImportScript = (function() {
   var pattern = /-v\d/;
   var scriptRootFolder;
   var macRoot = "//GlobalPrefs/CURRENT/src/AE/scripts/Releases";
-  var pcRoot = Config.globals.scriptsRootPath;
-
+  var pcRoot = "//abadal/GlobalPrefs/CURRENT/src/AE/scripts/Releases";
   function setScriptFile(scriptPath) {
-    if (isWindows === true) {
-      // var pcRootFolder = Folder(pcRoot + "/" + scriptPath);
-      findScriptFile(pcRootFolder);
+    if (isWindows() === true) {
+      var pcRootFolder = Folder(pcRoot + "/" + scriptPath);
+      scriptRootFolder = findScriptFile(pcRootFolder);
     } else {
       var macRootFolder = Folder(macRoot + "/" + scriptPath);
-      findScriptFile(macRootFolder);
+      scriptRootFolder = findScriptFile(macRootFolder);
     }
 
     var scriptFile = File(scriptRootFolder.fsName + "/" + scriptPath + ".jsx");
@@ -20,11 +19,15 @@ var ImportScript = (function() {
 
   function findScriptFile(rootFolder) {
     var rootFolderFiles = rootFolder.getFiles();
+    alert(rootFolderFiles)     
     for (var f = 0; f < rootFolderFiles.length; f++) {
+ 
       if (rootFolderFiles[f].displayName.match(pattern)) {
-        scriptRootFolder = Folder(rootFolderFiles[f].fsName);
+       
+       return Folder(rootFolderFiles[f].fsName);
       }
     }
+    
   }
 
   /**
@@ -46,5 +49,11 @@ var ImportScript = (function() {
   function isWindows() {
     return $.os.indexOf("Windows") != -1;
   }
+
+  
+
+
   return { runScript: runScript };
 })();
+
+ImportScript.runScript("dynamicContentToJSON")
