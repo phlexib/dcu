@@ -46,7 +46,5 @@ var ImportScript = (function() {
   function isWindows() {
     return $.os.indexOf("Windows") != -1;
   }
-
-
   return { runScript: runScript };
 })();
