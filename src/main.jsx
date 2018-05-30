@@ -1,5 +1,5 @@
 ﻿(function(thisObj) {
-  ImportScript.runScript("dynamicContentToJSON/dynamicContentToJSON.jsx");
+  ImportScript.runScript("dynamicContentToJSON");
 
   ///// Globals Variables
   
